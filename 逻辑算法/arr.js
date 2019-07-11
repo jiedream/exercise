@@ -26,7 +26,9 @@ for(var i=0,j=0,result=[];i<arr1.length&&j<arr2.length;){
 		j++;
 	}
 }
-// console.log(result)
+
+
+
 
 //一个已经排好序的数组找出任意两个数相加的和为19的两个数
 var arr = [1,2,4,6,7,11,12,15,17,19];
@@ -40,6 +42,7 @@ for(var i=0,j=arr.length-1;i<j;){
 		i++;
 	}
 }
+
 
 
 // 请把两个数组 ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'] 
@@ -60,3 +63,74 @@ let a3 = [...a1,...a2].sort().map((item) => {
 	return item
 })
 console.log(a3)
+
+
+
+// 判断一个对象是不是数组类型  一共有几种方法
+// 不正确的方法typeof   typeof判断原始类型 不能判断引用类型的详细类型
+var n=10,str="hello",b=true,nu=null,un;
+var f=function(){};
+var obj1={} , obj2=[1,2,3] , obj3=new Date();
+console.log(
+	typeof(n),//number
+	typeof(str),//string
+	typeof(b),//boolean
+	typeof(nu),//object
+	typeof(un),//undefined
+	typeof(f),//function
+	typeof(obj1),//object
+	typeof(obj2),//object
+	typeof(obj3)//object
+)
+
+
+
+//用爹判断对象是不是数组家孩子：3种
+//1.用_proto_获得对象的爹，然后再和数组的爹作比较
+console.log(
+	obj1.__proto__==Array.prototype,//false
+	obj2.__proto__==Array.prototype,//true
+	obj3.__proto__==Array.prototype//false
+)
+//2.因为_proto_可能被浏览器禁用，所以有等效的函数来完成
+//_proto_的任务：Object.getPrototypeOf(child)
+console.log(
+	Object.getPrototypeOf(obj1)==Array.prototype,//false
+	Object.getPrototypeOf(obj2)==Array.prototype,//true
+	Object.getPrototypeOf(obj3)==Array.prototype//false
+)
+//3.一种更直接的函数：father.isPrototypeOf(child)
+console.log(
+	Array.prototype.isPrototypeOf(obj1),
+	Array.prototype.isPrototypeOf(obj2),
+	Array.prototype.isPrototypeOf(obj3),
+)
+//判断妈妈
+//4.用父级原型对象中constructor属性
+console.log(
+	obj1.constructor==Array,
+	obj2.constructor==Array,
+	obj3.constructor==Array,
+)
+// 5.用"child instanceof 妈妈"  ==》bool
+//				实例
+console.log(
+	// obj1是Array的孩子(实例)吗
+	obj1 /*is*/ instanceof Array,
+	obj2 /*is*/ instanceof Array,
+	obj3 /*is*/ instanceof Array,
+)
+//6. 输出对象中的DNA：内部隐藏属性class
+// Object.prototype.toString.call(obj1)是判断任意类型的最可靠方法
+console.log(Object.prototype.toString.call(obj1)=="[object Array]");//false
+console.log(Object.prototype.toString.call(obj2)=="[object Array]");//true
+console.log(Object.prototype.toString.call(obj3)=="[object Array]");//false
+// ES5中新增了一个专门判断一个对象是不是数组的函数；
+// Array.isArry(obj)
+// isArray()封装的就是 Object.prototype.toString.call(obj1)
+console.log(
+	Array.isArry(obj1),
+	Array.isArry(obj2),
+	Array.isArry(obj3)
+)
+// 共七种
