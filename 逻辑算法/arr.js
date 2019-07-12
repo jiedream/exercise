@@ -1,4 +1,5 @@
 //数组去重
+//方法一:
 function test(arr){
 	var arr1 = [];
 	for(var i=0;i<arr.length;i++){
@@ -10,10 +11,20 @@ function test(arr){
 }
 var arr = [1,1,2,2];
 // console.log(test(arr));
+//方法二:定义一个哈希对象  哈希对象：一个对象中不允许有重复的下标
+var arr=[1,2,3,2,1,4];
+var hash={};//哈希对象
+for(var i=0;i<arr.length;i++){
+	hash[arr[i]]=1;
+}
+var res=[];
+var i=0;
+for(res[i++] in hash);
+//console.log(res)
+
 
 //一次遍历找出两个已经排好序的数组中所有相同的值
 //题眼=》两个排好序的数组
-console.log(1)
 var arr1 = [1,3,7,9,37,45,92,99];
 var arr2 = [2,4,9,13,37,88,92];
 for(var i=0,j=0,result=[];i<arr1.length&&j<arr2.length;){
@@ -26,8 +37,20 @@ for(var i=0,j=0,result=[];i<arr1.length&&j<arr2.length;){
 		j++;
 	}
 }
+console.log(result);
 
 
+//去掉数组中非数字字符，并给每个数字+1
+//只要数组在遍历中要改变数组长度  要从后往前遍历
+var arr=[1,2,3,"a",4,"b"]
+for(var i=arr.length-1;i>=0;i--){
+	if(typeof(arr[i])=="number"){
+		arr[i]++
+	}else{
+		arr.splice(i,1)
+	}
+}
+console.log(arr);
 
 
 //一个已经排好序的数组找出任意两个数相加的和为19的两个数
@@ -62,7 +85,7 @@ let a3 = [...a1,...a2].sort().map((item) => {
 
 	return item
 })
-console.log(a3)
+//console.log(a3)
 
 
 
@@ -129,8 +152,8 @@ console.log(Object.prototype.toString.call(obj3)=="[object Array]");//false
 // Array.isArry(obj)
 // isArray()封装的就是 Object.prototype.toString.call(obj1)
 console.log(
-	Array.isArry(obj1),
-	Array.isArry(obj2),
-	Array.isArry(obj3)
+	Array.isArray(obj1),
+	Array.isArray(obj2),
+	Array.isArray(obj3)
 )
 // 共七种
